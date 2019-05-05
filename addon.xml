@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.music.userrating"
+    name="Set Song User Rating"
+    version="1.0.0"
+    provider-name="scott967">
+    <requires>
+        <import addon="xbmc.python" version="2.24.0" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Enter your rating for playing music</summary>
+        <summary lang="es">Ingrese su calificación para reproducir música</summary>
+		<summary lang="fr">Entrez votre note pour jouer de la musique</summary>
+        <description lang="en">Enter 0 - 10 stars</description>
+		<description lang="es">Entrar 1-10 estrellas</description>
+        <description lang="fr">Entrez 1- 10 étoiles</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <source>https://github.com/scott967/script.music.userrating</source>
+        <email></email>
+    </extension>
+</addon>
