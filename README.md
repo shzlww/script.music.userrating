@@ -10,10 +10,10 @@ Script can be run from a skin using built-in "RunScript(script.music.userrating,
 
 Example:  bind a keyboard key
 
-'<visualisation>'
-      '<keyboard>'
-	     '<numpadthree>'RunScript(script.music.userrating,3)'</numpadthree>'
-	'</keyboard>'
-'</visualisation>'
+\<visualisation\>
+      \<keyboard\>
+	     \<numpadthree\>RunScript(script.music.userrating,3)\</numpadthree\>
+	\</keyboard\>
+\</visualisation\>
 
 	 
