@@ -9,8 +9,10 @@ Install the script from zip
 Script can be run from a skin using built-in "RunScript(script.music.userrating,n)" where n is a string representing integer 0 -10
 
 Example:  bind a keyboard key
-我使用的是一个7键的键盘作为播放器控制按钮配置如下：
+
+我使用的是一个7键的键盘作为播放器控制按钮配置如下：  
 #/storage/.kodi/userdata/keymaps/mykeymap.xml
+```
 <keymap>
   <global>
     <keyboard>
@@ -28,7 +30,5 @@ Example:  bind a keyboard key
       <power>Suspend()</power>
     </keyboard>
   </global>
-</keymap>
-
-
-	 
+</keymap>  
+```
