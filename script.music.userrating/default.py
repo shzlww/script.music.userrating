@@ -6,7 +6,9 @@ import xbmc
 import sys
 import os
 import xbmcaddon
-
+#set utf8 for Chinese
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 __addon__               = xbmcaddon.Addon()
 __addon_id__            = __addon__.getAddonInfo('id')
@@ -22,25 +24,32 @@ class Rating():
         
     def main(self):
         xbmcgui.Window(10000).setProperty(__addon_id__ + '_running',  'true')
+        newRating = ''
         # detect that user entred a valid rating (integer 0 - 10)
-        if len(sys.argv) != 2 or  int(sys.argv[1]) < 0 or int(sys.argv[1]) > 10:
-            # No rating
-            xbmc.executebuiltin('Notification(' + __addonname__ + ', ' + xbmc.getLocalizedString(38022) + ', 2000, ' + xbmcgui.NOTIFICATION_INFO + ')')
-            return
-        newRating = int(sys.argv[1])
+        if len(sys.argv) == 2:
+            if int(sys.argv[1]) < 0 or int(sys.argv[1]) > 10:
+                # No rating
+                xbmc.executebuiltin('Notification(' + __addonname__ + ', ' + xbmc.getLocalizedString(38022) + ', 2000, ' + xbmcgui.NOTIFICATION_INFO + ')')
+                return
+            else:
+                newRating = sys.argv[1]
+        else:
+            # set default rating
+            newRating = '10'
+
         # detect no song playing
         if not xbmc.getInfoLabel('MusicPlayer.DBID'):
             # Couldn't get songs from database
             xbmc.executebuiltin('Notification(' + __addonname__ + ', ' + xbmc.getLocalizedString(16034) + ', 2000, ' + xbmcgui.NOTIFICATION_INFO + ')')
             return
         
-        jsonNew = '{"jsonrpc": "2.0", "id": 1, "method": "AudioLibrary.SetSongDetails", "params": { "songid" : ' + xbmc.getInfoLabel('MusicPlayer.DBID') + ', "userrating": ' + sys.argv[1] + ' }}'
-        # xbmc.log('music.userrating JOSN call:  ' + jsonNew)
+        jsonNew = '{"jsonrpc": "2.0", "id": 1, "method": "AudioLibrary.SetSongDetails", "params": { "songid" : ' + xbmc.getInfoLabel('MusicPlayer.DBID') + ', "userrating": ' + newRating + ' }}'
+        xbmc.log('music.userrating JOSN call:  ' + jsonNew)
         jsonResponse = xbmc.executeJSONRPC(jsonNew)
-        # xbmc.log('music.userrating response:  ' + jsonResponse)
+        xbmc.log('music.userrating response:  ' + jsonResponse)
         if jsonResponse and ('OK' in jsonResponse):
             # My rating
-            xbmc.executebuiltin('Notification(' + __addonname__ + ', ' + xbmc.getLocalizedString(38018) + ' : ' + sys.argv[1] + ', 3000, ' + xbmcgui.NOTIFICATION_INFO + ')')
+            xbmc.executebuiltin('Notification(' + __addonname__ + ', ' + xbmc.getLocalizedString(38018) + ' : ' + newRating + ', 3000, ' + xbmcgui.NOTIFICATION_INFO + ')')
         else:
             # Update failed
             xbmc.executebuiltin('Notification(' + __addonname__ + ', ' + xbmc.getLocalizedString(113) + ', 3000, ' + xbmcgui.NOTIFICATION_INFO + ')')
